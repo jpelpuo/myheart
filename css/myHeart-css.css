@@ -1,0 +1,89 @@
+.input-square{
+	border-radius: 0 !important;
+}
+
+.icon-background{
+	background-color: white;
+	border-right: 0;
+}
+
+.input-border{
+	border-left: 0
+}
+
+.login-btn{
+	background-color: #285e0e !important;
+	border-color: #25590d !important;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 50px !important;
+    font-size: 14px;
+}
+
+#sidebar {
+    min-width: 230px;
+    max-width: 230px;
+    height: 100vh;
+    background-color: #003366;
+    position: fixed;
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -230px;
+}
+
+#content{
+	position: absolute;
+	margin-left: 230px;
+	transition: all 0.3s;
+	padding: 20px;
+}
+
+
+#sidebar ul li a{
+	display: block;
+	color: white;
+}
+
+#sidebar ul li a:hover{
+	background-color: #00264d;
+}
+
+.sidenavdrop{
+	background-color: #001a33;
+	display: none;
+}
+
+.sidenavdrop a:hover{
+	background-color: #004280 !important;
+}
+
+.navbar{
+	height: 50px !important;
+}
+
+.logout:visited{
+	color:black !important;
+}
+
+.logout:active{
+	color: black !important;
+}
+
+.link-card:hover{
+	text-decoration: none;
+}
+
+.card-text{
+	font-size: 16px !important;
+}
+
+.active-page{
+	background-color: #004280 !important;
+}
