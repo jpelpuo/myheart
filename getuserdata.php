@@ -3,7 +3,7 @@
 	//include('sys.php');
 
 	$columns = array();
-	$result = shell_exec('python "C:/xampp/htdocs/myHeartApp/model.py" "[20,50]"');
+	$result = exec('python "C:/xampp/htdocs/myHeart/model.py"');
 
 	echo $result;
 

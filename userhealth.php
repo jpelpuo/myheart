@@ -106,11 +106,11 @@
 
 		});	
 
-		$(".card").hover(function() {
-					$(this).addClass("shadow");
-				}, function() {
-					$(this).removeClass("shadow");
-		}); 
+		// $(".card").hover(function() {
+		// 			$(this).addClass("shadow");
+		// 		}, function() {
+		// 			$(this).removeClass("shadow");
+		// }); 
 
 	</script>
  </body>

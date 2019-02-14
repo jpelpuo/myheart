@@ -19,8 +19,8 @@
 				$_SESSION["start"] = time();
 				$random = rand(100, 10000).$random;
 				$_SESSION["sessionid"] = $random;
-				$_SESSION["username"] = $row[0]["username"];
-				$_SESSION["name"] = $row[0]["name"];
+				$_SESSION["username"] = $row["username"];
+				$_SESSION["name"] = $row["name"];
 				header("Location: homepage.php");
 				session_encode();
 			}else{

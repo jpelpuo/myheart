@@ -46,10 +46,10 @@
 								<table class="table" id="users">
 									<thead>
 										<tr>
-											<td class="">ID</td>
-											<td>Name</td>
-											<td>Email</td>
-											<td>Action</td>
+											<th class="">ID</th>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -108,11 +108,11 @@
 
 			});
 
-			$(".card").hover(function() {
-				$(this).addClass("shadow");
-				}, function() {
-				$(this).removeClass("shadow");
-			}); 
+			// $(".card").hover(function() {
+			// 	$(this).addClass("shadow");
+			// 	}, function() {
+			// 	$(this).removeClass("shadow");
+			// }); 
 			
 		});	
 
