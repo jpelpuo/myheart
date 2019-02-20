@@ -91,4 +91,16 @@
 		$myHeartConnection->closeConnection();
 	}
 
+	function getUserCount($gender){
+		global $myHeartConnection;
+		if($gender == "All"){
+			$sql = "SELECT * from users";
+		}else{
+			$sql = "SELECT * FROM users WHERE gender = '$gender'";
+		}
+
+		$count = $myHeartConnection->selectBySql($sql);
+		return $count->num_rows;
+	}
+
  ?>

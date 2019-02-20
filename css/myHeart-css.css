@@ -22,6 +22,7 @@
     align-items: stretch;
     margin-top: 50px !important;
     font-size: 14px;
+    background-color: #f2f2f2 !important;
 }
 
 #sidebar {
@@ -43,6 +44,7 @@
 	margin-left: 230px;
 	transition: all 0.3s;
 	padding: 18px;
+	width: calc(100% - 230px);
 }
 
 
@@ -84,6 +86,16 @@
 	font-size: 16px !important;
 }
 
-.active-page{
-	background-color: #004280 !important;
+.count{
+	font-size: 35px !important;
+}
+
+.count-text{
+	font-size:14px !important;
+	font-weight: normal !important;
+}
+
+.current{
+	background-color: #00264d !important;
+	border-right:40px white !important;
 }

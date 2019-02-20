@@ -54,12 +54,9 @@
 									</thead>
 
 									<tbody>
-										<!-- <?php foreach($items = getUsers() as $item): ?>
-										<tr><?php echo $item['id']; ?></tr>
-										<tr><?php echo $item['name']; ?></tr>
-										<tr><?php echo $item['email']; ?></tr>
-										<tr></tr>
-										<?php endforeach; ?> -->
+										<tr>
+											
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -76,42 +73,14 @@
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/All.js"></script>
 
 	<script>
 		$(document).ready(function(){
-			 $('#sidebarCollapse').click(function (e) {
-			 	e.preventDefault();
-			 	if($('#sidebar').hasClass('active')){
-			 		$('#sidebar').removeClass('active');
-			 		$('#content').css('margin-left','230px');
-			 	}else{
-			 		$('#sidebar').addClass('active');
-        			$('#content').css('margin-left','0px');
-			 	}
-        		
-			});
-
-			$("#usermenu-1").click(function(){
-			 	$("#usersubmenu-1").slideToggle('fast');
-
-			});
-
-			$("#usermenu-2").click(function(){
-			 	$("#usersubmenu-2").slideToggle('fast');
-			});
-
 			$('#userhealth').DataTable({
 			"scrollX" : true
 			});
-
 		});	
-
-		// $(".card").hover(function() {
-		// 			$(this).addClass("shadow");
-		// 		}, function() {
-		// 			$(this).removeClass("shadow");
-		// }); 
-
 	</script>
  </body>
  </html>

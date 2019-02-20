@@ -40,7 +40,7 @@
 				<div class="row mt-3">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-header border border-info">View User Information</div>
+							<div class="card-header bg-info">View User Information</div>
 
 							<div class="card-body">
 								<table class="table" id="users">
@@ -49,6 +49,7 @@
 											<th class="">ID</th>
 											<th>Name</th>
 											<th>Email</th>
+											<th>Gender</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -58,6 +59,7 @@
 												<td class=""><?php echo $item["id"] ?></td>
 												<td><?php echo $item["name"] ?></td>
 												<td><?php echo $item["email"] ?></td>
+												<td><?php echo $item["gender"] ?></td>
 												<td><?php print_r($_SESSION) ?></td>
 											</tr>
 										<?php endforeach; ?>
@@ -78,45 +80,14 @@
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/All.js"></script>
 
 	<script>
 		$(document).ready(function(){
-			 $('#sidebarCollapse').click(function (e) {
-			 	e.preventDefault();
-			 	if($('#sidebar').hasClass('active')){
-			 		$('#sidebar').removeClass('active');
-			 		$('#content').css('margin-left','230px');
-			 	}else{
-			 		$('#sidebar').addClass('active');
-        			$('#content').css('margin-left','0px');
-			 	}
-        		
-			});
-
-			$("#usermenu-1").click(function(){
-			 	$("#usersubmenu-1").slideToggle('fast');
-
-			});
-
-			$("#usermenu-2").click(function(){
-			 	$("#usersubmenu-2").slideToggle('fast');
-			});
-
-
 			$('#users').DataTable({
 			"scrollX" : true,
-
-			});
-
-			// $(".card").hover(function() {
-			// 	$(this).addClass("shadow");
-			// 	}, function() {
-			// 	$(this).removeClass("shadow");
-			// }); 
-			
+			});	
 		});	
-
-
 	</script>
  </body>
  </html>

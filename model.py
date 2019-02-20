@@ -6,18 +6,18 @@ Created on Sun Feb  3 16:05:08 2019
 """
 
 # Packages for analysis
+import numpy as np
 import pandas as pd
 import sys, json
-import numpy as np
 from sklearn import svm
 
 # Packages for visuals
-import seaborn as sns; sns.set(font_scale=1.2)
+#import seaborn as sns; sns.set(font_scale=1.2)
 
 # Allows charts to appear in the notebook
 #%matplotlib inlin
 
-recipes = pd.read_csv('recipes_muffins_cupcakes.csv')
+recipes = pd.read_csv('C:/xampp/htdocs/myHeart/recipes_muffins_cupcakes.csv')
 
 ingredients = recipes[['Flour','Sugar']].values
 type_label = np.where(recipes['Type']=='Muffin', 0, 1)
@@ -29,10 +29,11 @@ model = svm.SVC(kernel='linear')
 model.fit(ingredients, type_label)
 
 try:
-    #flour = json.loads(sys.argv[1])
-    #sugar = json.loads(sys.argv[2])
-    flour = 50
-    sugar = 20
+    data = json.loads(sys.argv[1])
+    flour = data[0]
+    sugar = data[1]
+    #flour = 50
+    #sugar = 20
 except:
     print("ERROR")
     sys.exit(1)
