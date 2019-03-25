@@ -2,6 +2,14 @@
 	border-radius: 0 !important;
 }
 
+.background-pic{
+	background-image: url('../img/stethoscope-1.jpg');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 550px;
+}
+
 .icon-background{
 	background-color: white;
 	border-right: 0;
@@ -12,8 +20,8 @@
 }
 
 .login-btn{
-	background-color: #285e0e !important;
-	border-color: #25590d !important;
+	background-color: #005580 !important;
+	border-color: #004466 !important;
 }
 
 .wrapper {
@@ -29,7 +37,7 @@
     min-width: 230px;
     max-width: 230px;
     height: 100vh;
-    background-color: #003366;
+    background-color: #004466;
     position: fixed;
     z-index: 1;
     transition: all 0.3s;
@@ -54,16 +62,17 @@
 }
 
 #sidebar ul li a:hover{
-	background-color: #00264d;
+	background-color: #006699;
+	cursor: pointer;
 }
 
 .sidenavdrop{
-	background-color: #001a33;
+	background-color: #00334d;
 	display: none;
 }
 
 .sidenavdrop a:hover{
-	background-color: #004280 !important;
+	background-color: #006699 !important;
 }
 
 .navbar{
@@ -96,6 +105,24 @@
 }
 
 .current{
-	background-color: #00264d !important;
-	border-right:40px white !important;
+	background-color: #005580 !important;
+	border-left: 3px solid white !important;
+	-webkit- border-left: 3px solid white !important;
+}
+
+.progressbar-outer{
+	width: 100px; 
+	height: 90%; 
+	bottom:0;
+}
+
+.progressbar-inner{
+	margin-top: 300%;
+	height: 0%;
+	transition: background-color 0.5s;
+}
+
+
+body{
+	background-color: #f2f2f2 !important;
 }

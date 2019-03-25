@@ -33,35 +33,42 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h3><i class="far fa-address-card fa-lg"></i> User Management </h3>
+						<h3><i class="far fa-address-card fa-lg"></i> User Management </h3><hr>
 					</div>						
 				</div>
 
 				<div class="row mt-3">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-header bg-info">View User Information</div>
+							<div class="card-header"><h5>View User Information</h5></div>
 
 							<div class="card-body">
-								<table class="table" id="users">
-									<thead>
+								<table class="table-striped display cell-border" id="users" style="width: 100%;">
+									<thead class="text-center">
 										<tr>
-											<th class="">ID</th>
+											<th class="">No</th>
+											<th>Patient ID</th>
 											<th>Name</th>
 											<th>Email</th>
-											<th>Gender</th>
-											<th>Action</th>
+											<th>Sex</th>
+											<th>Date of Birth</th>
+											<th>Actions</th>
 										</tr>
 									</thead>
-									<tbody>
+
+									<tbody class="text-center">
+										<?php $counter = 1; ?>
 										<?php foreach ($items = getUsers() as $item): ?>
 											<tr>
-												<td class=""><?php echo $item["id"] ?></td>
+												<td class=""><?php echo $counter; ?></td>
+												<td><?php echo $item["patient_id"] ?></td>
 												<td><?php echo $item["name"] ?></td>
 												<td><?php echo $item["email"] ?></td>
-												<td><?php echo $item["gender"] ?></td>
-												<td><?php print_r($_SESSION) ?></td>
+												<td><?php echo $item["sex"] ?></td>
+												<td><?php echo $item["dob"] ?></td>
+												<th><button class="btn btn-link"><i class="fa fa-redo-alt"></i> Update</button> <!-- <button class="btn btn-link text-danger"><i class="fa fa-trash-alt"></i> Delete</button> --></th>
 											</tr>
+											<?php $counter += 1; ?>
 										<?php endforeach; ?>
 										<?php $myHeartConnection->closeConnection(); ?>
 									</tbody>
@@ -75,10 +82,9 @@
 	</div>
 
 
-
+	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="js/All.js"></script>
 

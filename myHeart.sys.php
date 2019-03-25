@@ -25,8 +25,7 @@
 			}
 		}
 
-
-		//Run insert sql statements
+		//Run select sql statements
 		public function selectBySql($sql){
 			$rows = $this->connection->query($sql);
 			// $items = $rows->fetch_all(MYSQLI_ASSOC);
@@ -40,7 +39,7 @@
 		}
 
 
-		//Run insert sql statements
+		//Run update sql statements
 		public function updateBySql($sql){
 			$rows = $this->connection->query($sql);
 			return $rows;
@@ -51,6 +50,7 @@
 			$rows = $this->connection->query($sql);
 		}
 
+		//CLose db connection
 		public function closeConnection(){
 			$this->connection->close();
 		}

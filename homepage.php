@@ -31,63 +31,85 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<h3><i class="fas fa-home fa-lg"></i> Dashboard</h3>
+						<h3><i class="fas fa-chart-line fa-lg"></i> Analytics</h3><hr>
 					</div>						
 				</div>
 
 				<div class="row mt-2">
 					<div class="col-md">
-						<div class="card shadow bg-info text-light">
+						<div class="card hover-shadow bg-info text-light">
 							<div class="card-body text-center">
-								<h3 class="font-weight-bold count"><?php echo $totalCount = getUserCount("All"); ?></h3>
+								<h3 class="font-weight-bold count" id="all-count"><?php echo $totalCount = getUserCount(); ?></h3>
 
 								<p class="card-text count-text">
-									Total Users
+									Total Patients
 								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md">
-						<div class="card shadow bg-info text-light">
+						<div class="card hover-shadow bg-info text-light">
 							<div class="card-body text-center">
-								<h3 class="font-weight-bold count"><?php echo $totalMale = getUserCount("Male"); ?></h3>
+								<h3 class="font-weight-bold count" id="male-count"><?php echo $totalMale = getUserCount("Male"); ?></h3>
 
 								<p class="card-text count-text">
-									Male Users
+									Male Patients
 								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md">
-						<div class="card shadow bg-info text-light">
+						<div class="card hover-shadow bg-info text-light">
 							<div class="card-body text-center">
-								<h3 class="font-weight-bold count"><?php echo $totalFemale = getUserCount("Female"); ?></h3>
+								<h3 class="font-weight-bold count" id="female-count"><?php echo $totalFemale = getUserCount("Female"); ?></h3>
 								<p class="card-text count-text">
-									Female Users
+									Female Patients
 								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md">
-						<div class="card shadow bg-info text-light">
+						<div class="card hover-shadow bg-info text-light">
 							<div class="card-body text-center">
-								<h3 class="font-weight-bold count"><?php echo $totalPercent = round((getUserCount("Male") / $totalCount)  * 100) .'%'; ?></h3>
+								<h3 class="font-weight-bold count">
+									<?php 
+									if($totalCount == 0){
+										$totalPercent = 0;
+									}else{
+										$totalPercent = round((getUserCount("Male") / $totalCount)  * 100);
+									}
+									echo $totalPercent .'%'; 
+
+									?>
+									
+								</h3>
 								<p class="card-text count-text">
-									% Male Users
+									% Male Patients
 								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md">
-						<div class="card shadow bg-info text-light">
+						<div class="card hover-shadow bg-info text-light">
 							<div class="card-body text-center">
-								<h3 class="font-weight-bold count"><?php echo $totalPercent = round((getUserCount("Female") / $totalCount)  * 100) .'%'; ?></h3>
+								<h3 class="font-weight-bold count">
+									<?php 
+									if($totalCount == 0){
+										$totalPercent = 0;
+									}else{
+										$totalPercent = round((getUserCount("Female") / $totalCount)  * 100);
+									}
+									echo $totalPercent .'%'; 
+
+									?>
+										
+									</h3>
 								<p class="card-text count-text">
-									% Female Users
+									% Female Patients
 								</p>
 							</div>
 						</div>
@@ -99,6 +121,10 @@
 					<div class="col-md-4">
 						<!-- <a href="users.php" class="text-decoration-none text-dark link-card"> -->
 							<div class="card bg-light hover-shadow">
+								<div class="card-header">
+									Number of users
+									<!-- <button type="button" class="close" data-dismiss="card">&times;</button> -->
+								</div>
 								<div class="card-body">
 									<canvas id="user-chart-line" height="300"></canvas>
 								</div>
@@ -109,6 +135,9 @@
 					<div class="col-md-4">
 						<!-- <a href="userhealth.php" class="text-decoration-none text-dark link-card"> -->
 							<div class="card bg-light hover-shadow">
+								<div class="card-header">
+									Number of users
+								</div>
 								<div class="card-body">
 									<canvas id="user-chart" height="300"></canvas>
 								</div>
@@ -119,6 +148,9 @@
 					<div class="col-md-4">
 						<!-- <a href="userhealth.php" class="text-decoration-none text-dark link-card"> -->
 							<div class="card bg-light hover-shadow">
+								<div class="card-header">
+									Number of Users
+								</div>
 								<div class="card-body">
 									<canvas id="user-health" height="300"></canvas>
 								</div>
@@ -131,13 +163,14 @@
 	</div>
 
 
-
+	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/Chart.min.js"></script>
-	<script type="text/javascript" src="js/chart-script.js"></script>
+	<script type="text/javascript" src="js/fusioncharts.js"></script>
+	<script type="text/javascript" src="js/themes/fusioncharts.theme.fusion.js"></script>
 	<script type="text/javascript" src="js/All.js"></script>
+	<script type="text/javascript" src="js/chart-script.js"></script>
 
 	<script>
 		

@@ -1,4 +1,15 @@
+//Global variables
+var outer_height;
+var diagnosis_percent;
+var diagnosis;
+var path;
+var formData;
+var predictionDetails;
+
+
 $(document).ready(function(){
+
+			// Sidebar interactivity
 			 $('#sidebarCollapse').click(function (e) {
 			 	e.preventDefault();
 			 	if($('#sidebar').hasClass('active')){
@@ -14,6 +25,7 @@ $(document).ready(function(){
 
 			 $("#usermenu-1").click(function(){
 			 	$("#usersubmenu-1").slideToggle('fast');
+			 	// $("#angle").css("transform","rotate(180deg)")
 			 });
 
 			 $("#usermenu-2").click(function(){
@@ -23,19 +35,137 @@ $(document).ready(function(){
 			 $(".hover-shadow").hover(function() {
 				$(this).addClass("shadow");
 				}, function() {
-					$(this).removeClass("shadow");
+				$(this).removeClass("shadow");
 	});
 
-	var path = window.location.pathname;
+	//  Highlight sidebar link when active
+	path = window.location.href.toLowerCase();
 
-	if(path == "/myheart/homepage.php"){
-		$("#dashboard").addClass('current');
-	}else if(path == "/myheart/users.php"){
-		$("#usermgmt-1").addClass('current');
-		$("#usersubmenu-1").slideToggle('fast');
-	}else if(path == "/myheart/userhealth.php"){
-		$("#health").addClass('current');
-		$("#usersubmenu-2").slideToggle('fast');
+	if(path == "http://localhost/myheart/homepage.php".toLowerCase()){
+		$("#home").addClass('current');
 	}
+	else if(path == "http://localhost/myheart/addpatient.php".toLowerCase()){
+		$("#usersubmenu-1").slideToggle('fast');
+		$("#usermgmt-1").addClass('current');
+	}
+	else if(path == "http://localhost/myheart/users.php".toLowerCase()){
+		$("#usersubmenu-1").slideToggle('fast');
+		$("#usermgmt-2").addClass('current');
+	}
+	else if(path == "http://localhost/myheart/userhealth.php".toLowerCase()){
+		$("#usersubmenu-2").slideToggle('fast');
+		$("#userhealth-1").addClass('current');
+	}
+	else if(path == "http://localhost/myheart/prediction.php".toLowerCase()){
+		$("#predict").addClass('current');
+	}
+
+	// Submit prediction attributes and get prediction results
+	$('#prediction_form').on('submit', function(e){
+			e.preventDefault();
+			var date = new Date();
+			var dob = new Date($('#dob').val());
+			var age = date.getFullYear() - dob.getFullYear();
+			var sex = $('#sex').val();
+			var chest_pain = $('#chest_pain').val();
+			var blood_pressure = $('#blood_pressure').val();
+			var cholesterol = $('#cholesterol').val();
+			var fbs = $('#fbs').val();
+			var resting_ECG = $('#resting_ECG').val();
+			var heart_rate = $('#heart_rate').val();
+			var induced_angina = $('#induced_angina').val();
+			var st_depression = $('#st_depression').val();
+			var slope = $('#slope').val();
+			var no_of_vessels = $('#no_of_vessels').val();
+			var thal = $('#thal').val();
+
+			var form_attributes ={
+				"age":age.toString(),
+				"sex":sex,
+				"chest_pain":chest_pain,
+				"blood_pressure":blood_pressure,
+				"serum_cholestoral":cholesterol,
+				"fasting_blood_sugar":fbs,
+				"resting_ECG":resting_ECG,
+				"max_heart_rate":heart_rate,
+				"induced_angina":induced_angina,
+				"ST_depression":st_depression,
+				"slope":slope,
+				"no_of_vessels":no_of_vessels,
+				"thal":thal
+			}
+
+			$('html,body').animate({ scrollTop: 0 }, 'fast');
+			$('#spin').addClass('spinner-border');
+			$('#result').html('Calculating...');
+			//outer_height = $("#progressbar-outer").height();
+			
+			formData = JSON.stringify(form_attributes);
+			
+			// Make a request to api to make prediction using values provided
+			$.ajax({
+				url: 'http://localhost/myHeartApp/public/api/predict',
+				type: 'post',
+				data: formData,
+				headers: {
+					"Content-Type": 'application/json'
+				},
+				dataType: 'json',
+				success: function(data){
+					outer_height = $("#progressbar-outer").height();
+					diagnosis_percent = Math.round(data['data']['Probability'] * 100);
+					diagnosis = data['data']['Diagnosis'];
+					bgcolor = percentToRGB(diagnosis_percent);
+
+					animateProgressBar(outer_height,diagnosis_percent);
+					$('#response-details').removeClass('d-none');
+					$('#spin').removeClass('spinner-border');
+					$('#result').html("Heart disease risk level is " + diagnosis_percent + "%");
+					$('#response-font').html("A heart disease risk level of " + diagnosis_percent + "% means that the patient has a " + diagnosis_percent + "% likelihood of getting a heart disease. A prediction score ranging from 0% - 49% indicates a very low likelihood of getting heart disease. A score ranging from 50% - 100% indicates higher chances of getting heart disease.");
+					$('#response-details').css("background-color", bgcolor +" !important");
+					$('#response-details').removeClass('d-none');
+
+				}
+			});
+		});
+
+
+		// Animate progress bar for prediction
+		function animateProgressBar(height,percent){
+			$("#progressbar-inner").animate({
+				marginTop : (height - (height * percent) / 100),
+				height : (height * percent) / 100
+				}, 1000);
+
+			$({counter : 0}).animate({counter : percent},{
+				duration : 1000,
+				step : function(){
+					color = percentToRGB(Math.round(percent));
+					$("#progressbar-inner").text(Math.round(this.counter) + '%');
+					$("#progressbar-inner").css("background-color", color);
+				}
+			});
+		}
+
+		// Convert percentage value to RGB color
+		function percentToRGB(percent) {
+            var r, g, b;
+
+            if (percent < 50) {
+                // green to yellow
+                r = Math.floor(255 * (percent / 50));
+                g = 255;
+
+            } else {
+                // yellow to red
+                r = 255;
+                g = Math.floor(255 * ((50 - percent % 50) / 50));
+            }
+            b = 0;
+
+            return "rgb(" + r + "," + g + "," + b + ")";
+        }
+
 });
+
 
