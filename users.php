@@ -42,7 +42,7 @@
 						<div class="card">
 							<div class="card-header"><h5>View User Information</h5></div>
 
-							<div class="card-body">
+							<div class="card-body" style="overflow: auto;">
 								<table class="table-striped display cell-border" id="users" style="width: 100%;">
 									<thead class="text-center">
 										<tr>
@@ -90,9 +90,7 @@
 
 	<script>
 		$(document).ready(function(){
-			$('#users').DataTable({
-			"scrollX" : true,
-			});	
+			$('#users').DataTable();	
 		});	
 	</script>
  </body>

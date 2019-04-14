@@ -1,6 +1,15 @@
 <?php 
 	include('sys.php');
 	session_page();
+
+	$pat_id = null;
+	$patient = null;
+
+	if(isset($_GET['id'])){
+		$pat_id = $_GET['id'];
+
+		$patient = getUsers($pat_id);
+	}
 ?>
 
  <!DOCTYPE html>
@@ -37,11 +46,25 @@
 					</div>						
 				</div>
 
-				<div class="alert fade show alert-dismissible d-none alert-info" id="response-details">
-					<span id="response-font"></span><button type="button" class="close p-2" data-dismiss="alert">&times;</button>
+				<div class="row">
+					<div class="col-12">
+						<div id="patient-indicator" class="card d-none">
+							<div class="card-body">
+								Prediction for patient <span id="patient_id"><?php echo $pat_id; ?></span><span class="float-right"><span class="font-weight-bold">Patient Name:</span> <?php echo $patient[0]['name']; ?></span>
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div class="row mt-3">
+				<!-- <div class="row mt-2">
+					<div class="col-12">
+						<div class="alert fade show alert-dismissible d-none alert-info" id="response-details">
+							<span id="response-font"></span><button type="button" class="close p-2" data-dismiss="alert">&times;</button>
+						</div>
+					</div>
+				</div> -->
+
+				<div class="row mt-2">
 					<div class="col-md">
 						<div class="card input-square">
 							<div class="card-body">
@@ -50,16 +73,16 @@
 									<div class="form-group">
 										<div class="input-group has-feedback input-group-prepend">
 											<label class="input-group input-group-text form-control">Date of Birth</label>
-											<input type="date" class="form-control" id="dob" required="required"></input>
+											<input type="date" class="form-control" id="dob" required="required" value="<?php echo $patient[0]['dob']; ?>" <?php echo (!is_null($patient[0]['dob'])) ? 'readonly="readonly"' : ''; ?>></input>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<div class="input-group has-feedback input-group-prepend">
 											<label class="input-group input-group-text form-control">Sex</label>
-											<select class="form-control" id="sex" required>
-												<option value="1">Male</option>
-												<option value="0">Female</option>
+											<select class="form-control" id="sex" <?php echo (!is_null($patient[0]['sex'])) ? 'disabled="disabled"' : '' ?> required>
+												<option value="1" <?php echo $patient[0]['sex'] == 'Male' ? 'selected="selected"' : ''; ?>>Male</option>
+												<option value="0" <?php echo $patient[0]['sex'] == 'Female' ? 'selected="selected"' : ''; ?>>Female</option>
 											</select>
 										</div>
 									</div>
@@ -77,7 +100,7 @@
 									<div class="form-group">
 										<div class="input-group has-feedback input-group-prepend">
 											<label class="input-group input-group-text form-control">Resting Blood Pressure</label>
-											<input type="number" class="form-control" id="blood_pressure" required></input><span class="input-group-text input-group-append">mmHg</span> 
+											<input type="number" class="form-control" id="blood_pressure" required></input><span class="input-group-text input-group-append" min="90" max="250">mmHg</span> 
 										</div>
 									</div>
 
@@ -136,7 +159,7 @@
 
 									<div class="form-group">
 										<div class="input-group has-feedback input-group-prepend">
-											<label class="input-group input-group-text form-control">Slope</label>
+											<label class="input-group input-group-text form-control">Peak Exercise ST Segment</label>
 											<select class="form-control" id="slope" required>
 												<!-- <option value="" disabled selected>-- Slope of peak exercise ST segment-- </option> -->
 												<option value="1">Upsloping</option>
@@ -181,7 +204,7 @@
 
 
 					<div class="col-md">
-						<div class="card h-sm-4 input-square" style="height: 58%;">
+						<div class="card h-sm-4 input-square" style="height: 55%;">
 							<div class="card-body h-sm-4" style="height: 100%;">
 								<h5 class="">Prediction Results</h5><hr>
 
@@ -194,55 +217,27 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
-										<button class="btn float-right shadow" type="button" id="save" data-toggle="modal" data-target="#saveModal" style="background-color: #004466 !important; color: white;">Save Prediction</button>
-								</div>
+								<!-- <form> -->
+								<!-- <div class="form-group">
+										<button class="btn float-right shadow" type="submit" id="saveDetails" style="background-color: #004466 !important; color: white;">Save Prediction</button>
+								</div> -->
+								<!-- </form> -->
 							</div>
 
 							<!-- <div class="card-footer"> -->
 								
 							<!-- </div> -->
 						</div>
-					</div>
-				</div>
 
-				<!-- Save Modal -->
-				<div class="modal fade m-auto" tabindex="-1" id="saveModal" role="dialog" data-keyboard="true" data-backdrop="true">
-					<div class="modal-dialog">
-						<!-- Modal Content -->
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title">Save Prediction Details</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-
-							<div class="alert fade show alert-dismissible m-3 d-none" id="response">
-					 			<span id="response-text">Hello</span><button type="button" class="close p-2" data-dismiss="alert">&times;</button>
-							</div>
-
-							<form class="form" id="saveForm" method="post">
-								<div class="modal-body">
-									<h6 class="">Please specify/verify Patient ID</h6>
-									<div class="form-group">
-										<div class="input-group input-group-prepend">
-											<label class="form-control input-group input-group-text">Patient ID</label>
-											<input type="text" class="form-control" id="patient_id" required="required"></input>
-										</div>
-									</div>
+						<div class="card mt-2">
+							<div class="card-body">
+								<div class="alert fade show alert-dismissible d-none" id="response">
+					 				<span id="response-text"></span><button type="button" id="close" class="close p-2" data-dismiss="alert">&times;</button>
 								</div>
-
-								<div class="modal-footer">
-									<!-- <div id="response-message" class="p-2 rounded-sm form-group mr-auto d-none">
-										
-									</div> -->
-									<div class="form-group">
-										<button class="btn btn-success float-right" type="submit" id="save" data-toggle="modal" data-target="">Save</button>
-									</div>
-									<div class="form-group">
-										<button class="btn btn-danger float-right" type="button" data-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</form>
+								<form class="form" id="saveDetails" method="post">
+									<button class="btn float-left hover-shadow" type="submit" style="background-color: #004466 !important; color: white;" <?php echo !isset($pat_id) ? 'disabled="disabled"' : ''; ?>>Save Prediction</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -258,13 +253,13 @@
 	<script type="text/javascript" src="js/All.js"></script>
 
 	<script>
-		$('#saveForm').on('submit', function(e){
+		$('#saveDetails').on('submit', function(e){
 			e.preventDefault();
 
 			//Variables to store vlaues collected from the form
 			var date = new Date();
 			var dob = new Date($('#dob').val());
-			var patient_id = $('#patient_id').val();
+			var patient_id = $('#patient_id').text();
 			var age = date.getFullYear() - dob.getFullYear();
 			var sex = $('#sex').val();
 			var chest_pain = $('#chest_pain').val();
@@ -279,8 +274,13 @@
 			var no_of_vessels = $('#no_of_vessels').val();
 			var thal = $('#thal').val();
 
-
-			var prediction_details ={
+			if(diagnosis_percent == null){
+				$('#response-text').html("No prediction made. Data not saved.");
+				$('#response').removeClass("alert-success");
+				$('#response').removeClass("d-none");
+				$('#response').addClass("alert-danger");
+			}else{
+				var prediction_details ={
 				"patient_id": patient_id,
 				"age":age.toString(),
 				"sex":sex,
@@ -311,7 +311,13 @@
 				},
 				dataType : 'json',
 				success : function(data){
-					$('#response-text').html(data['Response Message']);
+					if(data['Response Message'] == "Details saved"){
+						$('#response-text').html(data['Response Message'] + " for patient " + patient_id + ".");
+					}
+					else{
+						$('#response-text').html(data['Response Message']);
+					}
+					
 					if(data['Success'] == true){
 						$('#response').removeClass("alert-danger");
 						$('#response').removeClass("d-none");
@@ -322,8 +328,14 @@
 						$('#response').addClass("alert-danger");
 					}
 				}
-			})
+			})	
+			}
+
+			
 		});	
+	</script>
+
+	<script type="text/javascript">
 	</script>
 </body>
 </html>

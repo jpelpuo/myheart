@@ -1,15 +1,19 @@
 var all_count = $('#all-count').html();
 var male_count = $('#male-count').html();
 var female_count = $('#female-count').html();
+var male_positive = $('#male-positive').html();
+var male_negative = $('#male-negative').html();
+var female_positive = $('#female-positive').html();
+var female_negative = $('#female-negative').html();
 
 var ctx = document.getElementById("user-chart").getContext('2d');
 		var myChart = new Chart(ctx, {
-			type : 'bar',
+			type : 'horizontalBar',
 			data: {
-				labels: ['Male', 'Female'],
+				labels: ['Male', 'Male', 'Female', 'Female'],
 				datasets:[{
-					label:'Number of Patients',
-					data:[male_count,female_count],
+					label:'Number of patients by diagnosis and sex',
+					data:[male_positive, male_negative,female_positive,female_negative],
 					backgroundColor: [
 					// 'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.9)',
@@ -22,6 +26,15 @@ var ctx = document.getElementById("user-chart").getContext('2d');
 					],
 					borderWidth: 1
 					}],
+			},
+			options:{
+				scales:{
+					yAxes : [{
+						ticks :{
+							beginAtZero : true
+						}
+					}]
+				}
 			}
 		}
 );

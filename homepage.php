@@ -37,7 +37,7 @@
 
 				<div class="row mt-2">
 					<div class="col-md">
-						<div class="card hover-shadow bg-info text-light">
+						<div class="card hover-shadow bg-info text-light" style="border: none !important;">
 							<div class="card-body text-center">
 								<h3 class="font-weight-bold count" id="all-count"><?php echo $totalCount = getUserCount(); ?></h3>
 
@@ -116,43 +116,35 @@
 					</div>
 
 				</div>
-
+				<div id="analytic-data" class="d-none">
+					<span id="male-positive"><?php echo getAnalyticData(1,1); ?></span>
+					<span id="male-negative"><?php echo getAnalyticData(1,0); ?></span>
+					<span id="female-positive"><?php echo getAnalyticData(0,1); ?></span>
+					<span id="female-negative"><?php echo getAnalyticData(0,0); ?></span>
+				</div>
 				<div class="row mt-4">
-					<div class="col-md-4">
-						<!-- <a href="users.php" class="text-decoration-none text-dark link-card"> -->
+
+					<div class="col-md-6">
+						<!-- <a href="userhealth.php" class="text-decoration-none text-dark link-card"> -->
 							<div class="card bg-light hover-shadow">
-								<div class="card-header">
+								<!-- <div class="card-header bg">
 									Number of users
-									<!-- <button type="button" class="close" data-dismiss="card">&times;</button> -->
-								</div>
+								</div> -->
 								<div class="card-body">
-									<canvas id="user-chart-line" height="300"></canvas>
+									<canvas id="user-chart" height="200"></canvas>
 								</div>
 							</div>
 						<!-- </a> -->
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<!-- <a href="userhealth.php" class="text-decoration-none text-dark link-card"> -->
 							<div class="card bg-light hover-shadow">
-								<div class="card-header">
-									Number of users
-								</div>
-								<div class="card-body">
-									<canvas id="user-chart" height="300"></canvas>
-								</div>
-							</div>
-						<!-- </a> -->
-					</div>
-
-					<div class="col-md-4">
-						<!-- <a href="userhealth.php" class="text-decoration-none text-dark link-card"> -->
-							<div class="card bg-light hover-shadow">
-								<div class="card-header">
+								<!-- <div class="card-header">
 									Number of Users
-								</div>
+								</div> -->
 								<div class="card-body">
-									<canvas id="user-health" height="300"></canvas>
+									<canvas id="user-health" height="200"></canvas>
 								</div>
 							</div>
 						<!-- </a> -->

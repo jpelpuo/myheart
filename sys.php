@@ -66,10 +66,14 @@
 	}
 
 	//get users from the Users Table
-	function getUsers(){
+	function getUsers($patient_id = FALSE){
 		global $myHeartConnection;
 
-		$sql = "SELECT * from patient";
+		if(!$patient_id){
+			$sql = "SELECT * from patient";
+		}else{
+			$sql = "SELECT * from patient where patient_id = '$patient_id'";
+		}
 		$rows = $myHeartConnection->selectBySql($sql);
 		return $rows->fetch_all(MYSQLI_ASSOC);
 	}
@@ -79,9 +83,9 @@
 		global $myHeartConnection;
 
 		if(!$patient_id){
-			$sql = "SELECT *, COUNT(prediction.patient_id) as number_of_predictions, patient.name as name from prediction RIGHT JOIN patient on prediction.patient_id=patient.patient_id GROUP BY(prediction.patient_id) ORDER BY prediction.patient_id DESC";
+			$sql = "SELECT *, patient.name from (SELECT *, MAX(prediction_date) as last_prediction, COUNT(patient_id) as number_of_predictions from prediction group by patient_id) predict RIGHT JOIN patient on predict.patient_id=patient.patient_id";
 		}else{
-			$sql = "SELECT *, COUNT(prediction.patient_id) as number_of_predictions, patient.name as name from prediction WHERE prediction.patient_id = '$patient_id' RIGHT JOIN patient on prediction.patient_id=patient.patient_id GROUP BY(prediction.patient_";
+			$sql = "SELECT COUNT(prediction.patient_id) as number_of_predictions, patient.name as name from prediction RIGHT JOIN patient on prediction.patient_id=patient.patient_id WHERE prediction.patient_id = '$patient_id'";
 		}
 		$rows = $myHeartConnection->selectBySql($sql);
 		return $rows->fetch_all(MYSQLI_ASSOC);
@@ -224,6 +228,22 @@
 		}
 
 		return $text;
+	}
+
+
+	// Get prediction data fro analytics
+	function getAnalyticData($sex, $diagnosis){
+		global $myHeartConnection;
+		// if($sex){
+			// $sql = "SELECT * FROM prediction WHERE diagnosis = '$diagnosis'";
+		// }else{
+			$sql = "SELECT * FROM prediction WHERE sex = '$sex' and diagnosis = '$diagnosis'";
+		// }
+
+		$rs = $myHeartConnection->selectBySql($sql);
+		$resultCount = $rs->num_rows;
+
+		return $resultCount;
 	}
 
  ?>

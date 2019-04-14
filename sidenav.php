@@ -12,6 +12,10 @@
                 <a href="homepage.php" class="nav-link"><i class="fa fa-chart-line"></i> Analytics</a>
             </li>
 
+            <li class="" id="patients">
+                <a href="patients.php" class="nav-link"><i class="fa fa-users"></i> Patients</a>
+            </li>
+
             <li class="" id="predict">
                 <a href="prediction.php" class="nav-link"><i class="fa fa-heartbeat"></i> Prediction</a>
             </li>

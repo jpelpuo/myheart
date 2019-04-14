@@ -9,6 +9,10 @@ var predictionDetails;
 
 $(document).ready(function(){
 
+	$("#close").on('click', function(){
+		$(this).parent().addClass("d-none");
+	})
+
 			// Sidebar interactivity
 			 $('#sidebarCollapse').click(function (e) {
 			 	e.preventDefault();
@@ -44,9 +48,9 @@ $(document).ready(function(){
 	if(path == "http://localhost/myheart/homepage.php".toLowerCase()){
 		$("#home").addClass('current');
 	}
-	else if(path == "http://localhost/myheart/addpatient.php".toLowerCase()){
-		$("#usersubmenu-1").slideToggle('fast');
-		$("#usermgmt-1").addClass('current');
+	else if(path == "http://localhost/myheart/patients.php".toLowerCase()){
+		// $("#usersubmenu-1").slideToggle('fast');
+		$("#patients").addClass('current');
 	}
 	else if(path == "http://localhost/myheart/users.php".toLowerCase()){
 		$("#usersubmenu-1").slideToggle('fast');
@@ -56,9 +60,16 @@ $(document).ready(function(){
 		$("#usersubmenu-2").slideToggle('fast');
 		$("#userhealth-1").addClass('current');
 	}
-	else if(path == "http://localhost/myheart/prediction.php".toLowerCase()){
+	else if(path == "http://localhost/myheart/prediction.php".toLowerCase() || path.substring(0, path.length - 10) == "http://localhost/myheart/prediction.php".toLowerCase()){
 		$("#predict").addClass('current');
 	}
+
+	if(path.length > 39){
+		$('#patient-indicator').removeClass('d-none');
+	}else{
+		$('#patient-indicator').addClass('d-none');
+	}
+
 
 	// Submit prediction attributes and get prediction results
 	$('#prediction_form').on('submit', function(e){
@@ -95,7 +106,7 @@ $(document).ready(function(){
 				"thal":thal
 			}
 
-			$('html,body').animate({ scrollTop: 0 }, 'fast');
+			$('html,body').animate({ scrollTop: 120 }, 'fast');
 			$('#spin').addClass('spinner-border');
 			$('#result').html('Calculating...');
 			//outer_height = $("#progressbar-outer").height();
@@ -121,9 +132,9 @@ $(document).ready(function(){
 					$('#response-details').removeClass('d-none');
 					$('#spin').removeClass('spinner-border');
 					$('#result').html("Heart disease risk level is " + diagnosis_percent + "%");
-					$('#response-font').html("A heart disease risk level of " + diagnosis_percent + "% means that the patient has a " + diagnosis_percent + "% likelihood of getting a heart disease. A prediction score ranging from 0% - 49% indicates a very low likelihood of getting heart disease. A score ranging from 50% - 100% indicates higher chances of getting heart disease.");
-					$('#response-details').css("background-color", bgcolor +" !important");
-					$('#response-details').removeClass('d-none');
+					// $('#response-font').html("A heart disease risk level of " + diagnosis_percent + "% means that the patient has a " + diagnosis_percent + "% likelihood of getting a heart disease. Risk levels lower than 50% mean low likelihood. Risk levels greater than 50% mean high likelihood.");
+					// $('#response-details').css("background-color", bgcolor +" !important");
+					// $('#response-details').removeClass('d-none');
 
 				}
 			});

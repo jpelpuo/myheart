@@ -1,11 +1,11 @@
 <?php 
 	class myHeart{
-		public $dbhost = "";
-		public $dbname = "";
-		public $dbuser = "";
-		public $rows = "";
-		public $items ="";
-		public $dbpassword = "";
+		public $dbhost = null;
+		public $dbname = null;
+		public $dbuser = null;
+		public $rows = null;
+		public $items =null;
+		public $dbpassword = null;
 
 		public $connection = null;
 

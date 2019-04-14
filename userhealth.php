@@ -1,8 +1,6 @@
 <?php 
 	include('sys.php');
 	session_page();
-
-	$pid = "";
  ?>
 
  <!DOCTYPE html>
@@ -19,7 +17,8 @@
  	<!-- Custom CSS -->
  	<link rel="stylesheet" type="text/css" href="css/myHeart-css.css">
  	<!-- DataTables -->
- 	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+ 	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css"> -->
+ 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
  </head>
  <body>
  	<?php 
@@ -44,8 +43,8 @@
 						<div class="card">
 							<div class="card-header"><h5>View Past Predictions</h5></div>
 
-							<div class="card-body">
-								<table class="table-striped display cell-border" id="userhealth" style="width: 100%;"> 
+							<div class="card-body" style="overflow: auto;">
+								<table class="table-striped display cell-border responsive no-wrap" id="userhealth" style="width: 100%;"> 
 									<thead class="text-center">
 										<tr>
 											<th>No</th>
@@ -64,7 +63,7 @@
 										<?php $diagnosis = ""; ?>
 										<?php foreach ($items = getPredictionDetails() as $item): ?>
 
-										<?php $date = date_create($item["prediction_date"]); ?>
+										<?php $date = date_create($item["last_prediction"]); ?>
 											<tr>
 												<td class=""><?php echo $counter; ?></td>
 												<td><?php echo $item["patient_id"]; ?></td>
@@ -86,7 +85,7 @@
 				</div>
 
 				<!-- View Modal -->
-				<div class="modal fade m-auto" tabindex="-1" id="viewModal" role="dialog" data-keyboard="true" data-backdrop="true">
+				<div class="modal patient-details fade m-auto" tabindex="-1" id="viewModal" role="dialog" data-keyboard="true" data-backdrop="true">
 					<div class="modal-dialog">
 						<!-- Modal Content -->
 						<div class="modal-content">
@@ -106,6 +105,8 @@
 											<input type="text" class="form-control" id="patient_id" required="required"></input>
 										</div>
 									</div> -->
+
+									<span id="getpid"></span>
 									<div class="row">
 										<div class="col-md">
 											<span class="font-weight-bold">Full Name: </span> 
@@ -140,31 +141,7 @@
 										<li class="list-group-item">
 											<span class="font-weight-bold">Sex: </span> 
 											<?php echo sexValueToText($item["sex"]); ?>
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
-										<li class="list-group-item">
-											
-										</li>
+										</li>	
 									</ul>
 								<!-- </div> -->
 								</div>
@@ -191,22 +168,31 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> -->
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 	<script type="text/javascript" src="js/All.js"></script>
 
 	<script>
 		$(document).ready(function(){
 			$('#userhealth').DataTable({
-			"scrollX" : true
+			// "scrollX" : true,
 			});
 
 			$(document).on("click", ".openPatientDialog", function(){
 				var patient_id = $(this).data('id');
 
-				$("#pid").text("<?php ob_start(); ?>" + patient_id + "<?php $pid = ob_get_contents(); ?>" + "<?php ob_end_flush(); ?>");
+				$("#pid").text(patient_id);
 
 				// document.cookie("patient_id="+patient_id);
-				alert("<?php echo $pid; ?>");
+				// alert("<?php //echo $pid; ?>");
+
+				$.ajax({
+					url : 'getpredictionhistory.php?pid='+patient_id,
+					type:'post',
+					success: function(data){
+						// alert(data);
+					}
+				})
 			});
 		});	
 

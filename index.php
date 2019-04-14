@@ -46,7 +46,7 @@
 				<div class="card-body" style="background-color: white;">
 					<form class="form" method="post" >
 						<!-- <h4><i class="fa fa-lock fa-2x" style="color: #005580;"></i></h4> -->
-						<h4 style="color: #005580;">Staff Login</h4>
+						<h4 style="color: #005580;">Login</h4>
 						<?php 
 							if(isset($_SESSION["errors"])){
 								$link = strtolower("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
@@ -61,7 +61,7 @@
 							<div class="form-group">
 								<div class="input-group has-feedback input-group-prepend">
 									<i class="form-control-feedback fa fa-user fa-lg input-group-text input-square icon-background" style="padding-top: 10px;"></i>
-									<input type="text" class="form-control input-square" name="staff_id" id="staff_id" placeholder="Staff ID" autofocus>
+									<input type="text" class="form-control input-square" name="staff_id" id="staff_id" placeholder="ID Number" autofocus>
 								</div>
 							</div>
 							<div class="form-group has-feedback">
