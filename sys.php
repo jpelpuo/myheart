@@ -83,7 +83,7 @@
 		global $myHeartConnection;
 
 		if(!$patient_id){
-			$sql = "SELECT *, patient.name from (SELECT *, MAX(prediction_date) as last_prediction, COUNT(patient_id) as number_of_predictions from prediction group by patient_id) predict RIGHT JOIN patient on predict.patient_id=patient.patient_id";
+			$sql = "SELECT *, patient.name from (SELECT *, MAX(prediction_date) as last_prediction, COUNT(patient_id) as number_of_predictions from prediction group by patient_id order by patient_id DESC) predict RIGHT JOIN patient on patient.patient_id=predict.patient_id";
 		}else{
 			$sql = "SELECT COUNT(prediction.patient_id) as number_of_predictions, patient.name as name from prediction RIGHT JOIN patient on prediction.patient_id=patient.patient_id WHERE prediction.patient_id = '$patient_id'";
 		}
@@ -241,6 +241,18 @@
 		// }
 
 		$rs = $myHeartConnection->selectBySql($sql);
+		$resultCount = $rs->num_rows;
+
+		return $resultCount;
+	}
+
+
+	function predictionCount(){
+		global $myHeartConnection;
+		$sql = "SELECT * from prediction";
+
+		$rs = $myHeartConnection->selectBySql($sql);
+
 		$resultCount = $rs->num_rows;
 
 		return $resultCount;

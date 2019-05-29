@@ -41,8 +41,13 @@
 		<div id="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-12">
-						<h3><i class="fas fa-heartbeat fa-lg"></i> Heart Disease Risk Level Prediction </h3><hr>
+					<div class="col-12 mb-2">
+						<div class="card alert-info">
+							<div class="card-body">
+								<h3><i class="fas fa-heartbeat fa-lg"></i> Heart Disease Risk Level Prediction </h3>
+							</div>
+						</div>
+						
 					</div>						
 				</div>
 
@@ -235,7 +240,7 @@
 					 				<span id="response-text"></span><button type="button" id="close" class="close p-2" data-dismiss="alert">&times;</button>
 								</div>
 								<form class="form" id="saveDetails" method="post">
-									<button class="btn float-left hover-shadow" type="submit" style="background-color: #004466 !important; color: white;" <?php echo !isset($pat_id) ? 'disabled="disabled"' : ''; ?>>Save Prediction</button>
+									<button class="btn float-left hover-shadow" type="submit" style="background-color: #004466 !important; color: white;" <?php echo !isset($pat_id) ? 'disabled="disabled"' : ''; ?>><i class="fa fa-save"></i> Save Prediction</button>
 								</form>
 							</div>
 						</div>

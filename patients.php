@@ -34,7 +34,12 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h3><i class="fa fa-users fa-lg"></i> Patients </h3><hr>
+						<div class="card alert-info">
+							<div class="card-body">
+								<h3><i class="fa fa-users fa-lg"></i> Patients </h3>
+							</div>
+						</div>
+						
 					</div>						
 				</div>
 

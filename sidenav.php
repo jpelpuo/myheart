@@ -20,7 +20,7 @@
                 <a href="prediction.php" class="nav-link"><i class="fa fa-heartbeat"></i> Prediction</a>
             </li>
 
-            <li class="" id="usermgmt">
+            <!-- <li class="" id="usermgmt">
                 <a class="nav-link usermenu" id="usermenu-1"><i class="far fa-address-card mr-1"></i> Patient Management <i class="fas fa-angle-down float-right mt-1" id="angle"></i></a>
                 <ul class="list-unstyled sidenavdrop" id="usersubmenu-1">
                 	<li class="" id="usermgmt-1">
@@ -31,7 +31,7 @@
                         <a href="users.php" class="nav-link pl-4"></i> View Patient Data</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <li class="" id="health">
                 <a class="nav-link" id="usermenu-2"><i class="fas fa-address-card mr-1"></i>Patient Health Data <i class="fas fa-angle-down float-right mt-1"></i></a>
                 <ul class="list-unstyled sidenavdrop" id="usersubmenu-2">

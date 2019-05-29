@@ -19,7 +19,7 @@
 		</li>
 
 		<li class="nav-item">
-			<a href="logout.php" class="nav-link text-dark"><i class="fa fa-sign-out-alt mr-2"></i>Logout</a>
+			<a href="logout.php" class="nav-link text-dark logout"><i class="fa fa-sign-out-alt mr-2"></i>Logout</a>
 		</li>
 	</ul>
 	

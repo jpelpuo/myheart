@@ -31,7 +31,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<h3><i class="fas fa-chart-line fa-lg"></i> Analytics</h3><hr>
+						<div class="card mb-3 alert-info">
+							<div class="card-body">
+								<h3><i class="fas fa-chart-line fa-lg"></i> Analytics</h3>
+							</div>
+						</div>
+						
 					</div>						
 				</div>
 
@@ -39,10 +44,10 @@
 					<div class="col-md">
 						<div class="card hover-shadow bg-info text-light" style="border: none !important;">
 							<div class="card-body text-center">
-								<h3 class="font-weight-bold count" id="all-count"><?php echo $totalCount = getUserCount(); ?></h3>
+								<h3 class="font-weight-bold count" id="all-count"><?php echo $totalPred = predictionCount(); ?></h3>
 
 								<p class="card-text count-text">
-									Total Patients
+									Total Predictions
 								</p>
 							</div>
 						</div>
@@ -76,10 +81,10 @@
 							<div class="card-body text-center">
 								<h3 class="font-weight-bold count">
 									<?php 
-									if($totalCount == 0){
+									if(getUserCount() == 0){
 										$totalPercent = 0;
 									}else{
-										$totalPercent = round((getUserCount("Male") / $totalCount)  * 100);
+										$totalPercent = round((getUserCount("Male") / getUserCount())  * 100);
 									}
 									echo $totalPercent .'%'; 
 
@@ -98,10 +103,10 @@
 							<div class="card-body text-center">
 								<h3 class="font-weight-bold count">
 									<?php 
-									if($totalCount == 0){
+									if(getUserCount() == 0){
 										$totalPercent = 0;
 									}else{
-										$totalPercent = round((getUserCount("Female") / $totalCount)  * 100);
+										$totalPercent = round((getUserCount("Female") / getUserCount())  * 100);
 									}
 									echo $totalPercent .'%'; 
 
@@ -127,7 +132,7 @@
 					<div class="col-md-6">
 						<!-- <a href="userhealth.php" class="text-decoration-none text-dark link-card"> -->
 							<div class="card bg-light hover-shadow">
-								<!-- <div class="card-header bg">
+								<!-- <div class="card-header">
 									Number of users
 								</div> -->
 								<div class="card-body">
@@ -165,7 +170,15 @@
 	<script type="text/javascript" src="js/chart-script.js"></script>
 
 	<script>
-		
+		$(document).ready(function(){
+			// $('.logout').click(function(){
+			// 	alert("Logging out");
+			// })
+
+			// alert("Hello");
+
+			// alert($("#male-negative").text());
+		})
 	</script>
  </body>
  </html>
