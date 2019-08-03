@@ -1,13 +1,13 @@
 <?php 
 
-	include("sys.php");
-	if(isset($_GET)){
+	// include("sys.php");
+	// if(isset($_GET)){
 
-		$pid = $_GET["pid"];
+	// 	$pid = $_GET["pid"];
 
-	}
+	// }
 
-	$results = getPredictionDetails($pid);
+	// $results = getPredictionDetails($pid);
 
-	echo json_encode($results);
+	// echo json_encode($results);
  ?>

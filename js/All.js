@@ -112,10 +112,11 @@ $(document).ready(function(){
 			//outer_height = $("#progressbar-outer").height();
 			
 			formData = JSON.stringify(form_attributes);
+			console.log(formData);
 			
 			// Make a request to api to make prediction using values provided
 			$.ajax({
-				url: 'http://localhost/myHeartApp/public/api/predict',
+				url: 'http://localhost/myHeart/api/public/predict',
 				type: 'post',
 				data: formData,
 				headers: {
@@ -123,6 +124,7 @@ $(document).ready(function(){
 				},
 				dataType: 'json',
 				success: function(data){
+					console.log(data);
 					outer_height = $("#progressbar-outer").height();
 					diagnosis_percent = Math.round(data['data']['Probability'] * 100);
 					diagnosis = data['data']['Diagnosis'];

@@ -308,7 +308,7 @@
 
 			//Make a request to api to save prediction details in the prediction table
 			$.ajax({
-				url : 'http://localhost/myHeartApp/public/api/save',
+				url : 'http://localhost/myHeart/api/public/save',
 				type : 'post',
 				data : predictionDetails,
 				headers: {

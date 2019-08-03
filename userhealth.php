@@ -250,7 +250,7 @@
 				// alert("<?php //echo $pid; ?>");
 
 				$.ajax({
-					url : 'http://localhost/myHeartApp/public/api/get/'+patient_id,
+					url : 'http://localhost/myHeart/api/public/get/'+patient_id,
 					type:'get',
 					success: function(data){
 						// alert($(data['Data']).length);
